@@ -1,5 +1,4 @@
 pandas
 matplotlib
 streamlit
-webbrowser
 scipy
