@@ -5,10 +5,8 @@ import streamlit as st
 import pandas as pd    ;import numpy as np          ;  import matplotlib.pyplot as plt    
 pd.set_option('mode.chained_assignment', None)
 from scipy.spatial import KDTree  
-
-# inicio_memoria = psutil.virtual_memory().used   
-
-# tiempo_inicio=time.time()
+data=pd.read_csv("UNI_CORR_500_01.txt", skiprows=3,sep="\t") #names= cuando la tabla no tiene un encabezado
+data["sk"]=0
 
 data=pd.read_csv("UNI_CORR_500_01.txt", skiprows=3,sep="\t") #names= cuando la tabla no tiene un encabezado
 data["sk"]=0
@@ -61,13 +59,14 @@ for frame in data["Frame"]:
     arbol=KDTree(Coordenadas_X_Y) #crea arbol con opciones
     Encontrar_coordenada_vecina()
 
-#hacer scarter plot sf en y velocidad en el y
-# print(data["sk"].mean())
+
 
 #--------------------------------------------------------------------------------------------------------------------
+st.title("Experimentacion sobre la dinamica peatonal ")
 st.write("""
-#Analisis de velocidad con Sk
+El presente problema se enmarca en un experimento que busca analizar cómo la densidad de las personas y el ancho de las puertas afectan en el tiempo de evacuación en un corredor con dos accesos, correspondientes a puerta uno y puerta dos, en las cuales además se presenta una simetría entre los lados de salida y entrada realizando una gran cantidad de carreras. Ahora bien, el análisis tendrá en cuenta una carrera, la cuales tendrán una dirección de derecha a izquierda con medidas de entradas y salidas de uno a cinco metros.
 """)
+st.title("Graficos de histograma y dispersion")
 tabla_experimento1=Dataframe_velocidades.groupby("# PersID").agg(np.mean)
 fig, ax = plt.subplots()
 ax.hist(tabla_experimento1,bins=15, color='green', edgecolor='black')
@@ -83,23 +82,18 @@ velocidad = data['Velocidad']
 
 data=data.dropna(subset=['Velocidad']) #elimino valores none
 
-fig, ax = plt.subplots()
-plt.figure(figsize=(10, 6))
-plt.scatter(sk,velocidad)  # alpha controla la transparencia de los puntos
-plt.title('Scatter Plot entre sk y Velocidad')
-plt.xlabel('sk')
-plt.ylabel('Velocidad')
-plt.grid(True)
-# Desplegamos el gráfico
+fig, ax = plt.subplots(figsize=(10, 6))  # Crear la figura y los ejes
+
+# Configurar el gráfico de dispersión
+ax.scatter(sk, velocidad, alpha=0.5)  # alpha controla la transparencia de los puntos
+ax.set_title('Scatter Plot entre sk y Velocidad')  # Usar 'set_title' para establecer el título
+ax.set_xlabel('sk')  # Usar 'set_xlabel' para establecer la etiqueta del eje X
+ax.set_ylabel('Velocidad')  # Usar 'set_ylabel' para establecer la etiqueta del eje Y
+ax.grid(True)  # Agregar una cuadrícula
+
+# Desplegar el gráfico usando Streamlit
 st.pyplot(fig)
-# fin_memoria = psutil.virtual_memory().used;           fin_tiempo = time.time()
-# # plt.show()
-# # plt.show()
-# tiempo_transcurrido = fin_tiempo - tiempo_inicio
-# print("Tiempo de ejecución: ",tiempo_transcurrido*1000," milisegundos")
-# memoria_utilizada = fin_memoria - inicio_memoria
-# print("Memoria utilizada: ", memoria_utilizada/ (1048576)," MB")
-# Using "with" notation
+
 with st.sidebar:
     # Titulo
     st.write("# Opciones")
@@ -107,20 +101,9 @@ with st.sidebar:
     div = st.slider('Número de bins:', 0, 130, 25)
     st.write("Bins=", div)
 
-st.write("""
-## Bases de datos
-""")
+st.title("Estadisticas obtenidas sobre SK")
 
-st.title("Abrir Archivo desde URL")
-
-import webbrowser
-
-st.title("Archivo del experimento numero ")
-
-# Define la ruta del archivo de texto
-ruta_archivo = "UNI_CORR_500_01.txt"
-
-# Botón para abrir el archivo en una nueva pestaña
-if st.button("Abrir Archivo"):
-    nueva_url = f"data:text/plain;base64,{open(ruta_archivo).read()}"
-    webbrowser.open_new_tab(nueva_url)
+# Graficamos una tabla
+st.table(data["sk"].describe())
+st.title("Estadisticas obtenidas sobre velocidad")
+st.table(data["Velocidad"].describe())
