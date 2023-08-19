@@ -8,7 +8,12 @@ from scipy.spatial import KDTree
 
 
 data=pd.read_csv("UNI_CORR_500_01_modificado.txt",sep="\t") #names= cuando la tabla no tiene un encabezado
-
+with st.sidebar:
+    # Titulo
+    st.write("# Opciones")
+    # slider
+    div = st.slider('Número de bins:', 0, 130, 25)
+    st.write("Bins=", div)
 
 
 #--------------------------------------------------------------------------------------------------------------------
@@ -47,12 +52,7 @@ ax.grid(True)  # Agregar una cuadrícula
 st.pyplot(fig)
 
 
-with st.sidebar:
-    # Titulo
-    st.write("# Opciones")
-    # slider
-    div = st.slider('Número de bins:', 0, 130, 25)
-    st.write("Bins=", div)
+
 
 st.title("Estadisticas obtenidas sobre SK")
 
