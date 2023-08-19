@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("UNI_CORR_500_01.txt", 
+df = pd.read_csv("dataset/traj_UNI_CORR_500_01.txt", 
                  skiprows=4, 
                  sep="\t", 
                  names=["ID", "frames", "X", "Y", "Z"])
