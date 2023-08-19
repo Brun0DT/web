@@ -47,7 +47,8 @@ ax.set_title('Scatter Plot entre sk y Velocidad')  # Usar 'set_title' para estab
 ax.set_xlabel('sk')  # Usar 'set_xlabel' para establecer la etiqueta del eje X
 ax.set_ylabel('Velocidad')  # Usar 'set_ylabel' para establecer la etiqueta del eje Y
 ax.grid(True)  # Agregar una cuadrícula
-
+st.write("""Nota: Velocidad en unidad de medida metros/segundo.
+""")
 # Desplegar el gráfico usando Streamlit
 st.pyplot(fig)
 
@@ -60,7 +61,8 @@ ax.set_xlabel('Personas')
 ax.set_ylabel('Velocidad')
 ax.set_title('Boxplot por persona experimento 01', loc='center')
 st.pyplot(fig)
-
+st.write("""Nota: El grafico corresponde a las primeras 10 personas en la experimentacion.
+""")
 
 st.title("Estadisticas obtenidas sobre SK")
 
