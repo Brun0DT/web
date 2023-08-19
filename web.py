@@ -26,7 +26,7 @@ tabla_experimento1=data[["# PersID","Velocidad"]].groupby("# PersID").agg(np.mea
 
 fig, ax = plt.subplots()
 
-ax.hist(tabla_experimento1,bins=15, color='green', edgecolor='black')
+ax.hist(tabla_experimento1, color='green', edgecolor='black')
 ax.set_xlabel('Velocidad')
 ax.set_ylabel('Frecuencia')
 ax.set_title('Histograma de Velocidad experimento 1', loc='center')
