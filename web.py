@@ -21,7 +21,7 @@ st.title("Experimentacion sobre la dinamica peatonal ")
 st.write("""
 El presente problema se enmarca en un experimento que busca analizar cómo la densidad de las personas y el ancho de las puertas afectan en el tiempo de evacuación en un corredor con dos accesos, correspondientes a puerta uno y puerta dos, en las cuales además se presenta una simetría entre los lados de salida y entrada realizando una gran cantidad de carreras. Ahora bien, el análisis tendrá en cuenta una carrera, la cuales tendrán una dirección de derecha a izquierda con medidas de entradas y salidas de uno a cinco metros.
 """)
-st.title("Graficos de histograma y dispersion")
+st.title("Graficos de histograma, dispersion y boxplot")
 tabla_experimento1=data[["# PersID","Velocidad"]].groupby("# PersID").agg(np.mean)
 
 fig, ax = plt.subplots()
@@ -51,7 +51,15 @@ ax.grid(True)  # Agregar una cuadrícula
 # Desplegar el gráfico usando Streamlit
 st.pyplot(fig)
 
-
+st.write("""Nota: El sk es calculado en base a las personas cercanas en un radio de 3 metros.
+""")
+#obtencion de grafico cajas y bigotes primeras 10 personas del primer experimento
+fig, ax = plt.subplots()
+ax.boxplot([data[(data["# PersID"]==i)]["Velocidad"]  for i in range(1,11)])
+ax.set_xlabel('Personas')
+ax.set_ylabel('Velocidad')
+ax.set_title('Boxplot por persona experimento 01', loc='center')
+st.pyplot(fig)
 
 
 st.title("Estadisticas obtenidas sobre SK")
