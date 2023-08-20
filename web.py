@@ -25,7 +25,11 @@ with st.sidebar:
     # Slider
     div = st.slider('Número de bins:', 0, 130, 25)
     st.write("Bins=", div)
-
+st.title("Experimentacion sobre la dinamica peatonal ")
+st.write("""
+El presente problema se enmarca en un experimento que busca analizar cómo la densidad de las personas y el ancho de las puertas afectan en el tiempo de evacuación en un corredor con dos accesos, correspondientes a puerta uno y puerta dos, en las cuales además se presenta una simetría entre los lados de salida y entrada realizando una gran cantidad de carreras. Ahora bien, el análisis tendrá en cuenta una carrera, la cuales tendrán una dirección de derecha a izquierda con medidas de entradas y salidas de uno a cinco metros.
+""")
+st.title("Graficos de histograma, dispersion y boxplot")
 # Resto del código para generar los gráficos y estadísticas
 # ...
 tabla_experimento1=data[["# PersID","Velocidad"]].groupby("# PersID").agg(np.mean)
@@ -49,7 +53,8 @@ ax.set_ylabel('Velocidad')
 ax.grid(True)
 st.write("Nota: Velocidad en unidad de medida metros/segundo.")
 st.pyplot(fig)
-
+st.write("""Nota: El sk es calculado en base a las personas cercanas en un radio de 3 metros.
+""")
 # Boxplot
 fig, ax = plt.subplots()
 ax.boxplot([data[(data["# PersID"] == i)]["Velocidad"] for i in range(1, 11)])
