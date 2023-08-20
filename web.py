@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 # Cargar los datasets
 data_01 = pd.read_csv("UNI_CORR_500_01_modificado.txt", sep="\t")
 data_06 = pd.read_csv("UNI_CORR_500_06_modificado.txt", sep="\t")
+st.title("Experimentacion sobre la dinamica peatonal ")
 
 # Widget para seleccionar el dataset
 dataset_seleccionado = st.sidebar.selectbox("Seleccionar dataset", {
@@ -16,7 +17,13 @@ dataset_seleccionado = st.sidebar.selectbox("Seleccionar dataset", {
 # Elegir el dataset correspondiente
 if dataset_seleccionado == "Dataset 01":
     data = data_01
+    st.write("""
+El presente problema se enmarca en un experimento que busca analizar cómo la densidad de las personas y el ancho de las puertas afectan en el tiempo de evacuación en un corredor con dos accesos, correspondientes a puerta uno y puerta dos, en las cuales además se presenta una simetría entre los lados de salida y entrada realizando una gran cantidad de carreras. Ahora bien, el análisis tendrá en cuenta una carrera, la cuales tendrán una dirección de derecha a izquierda con medidas de entradas y salidas de uno a cinco metros, con una cantidad de 148 personas.
+""")
 else:
+    st.write("""
+El presente problema se enmarca en un experimento que busca analizar cómo la densidad de las personas y el ancho de las puertas afectan en el tiempo de evacuación en un corredor con dos accesos, correspondientes a puerta uno y puerta dos, en las cuales además se presenta una simetría entre los lados de salida y entrada realizando una gran cantidad de carreras. Ahora bien, el análisis tendrá en cuenta una carrera, la cuales tendrán una dirección de derecha a izquierda con medidas de entradas y salidas de cuarto a cinco metros, pero una mayor densidad de poblacion.
+""")
     data = data_06
 
 with st.sidebar:
@@ -25,10 +32,7 @@ with st.sidebar:
     # Slider
     div = st.slider('Número de bins:', 0, 130, 25)
     st.write("Bins=", div)
-st.title("Experimentacion sobre la dinamica peatonal ")
-st.write("""
-El presente problema se enmarca en un experimento que busca analizar cómo la densidad de las personas y el ancho de las puertas afectan en el tiempo de evacuación en un corredor con dos accesos, correspondientes a puerta uno y puerta dos, en las cuales además se presenta una simetría entre los lados de salida y entrada realizando una gran cantidad de carreras. Ahora bien, el análisis tendrá en cuenta una carrera, la cuales tendrán una dirección de derecha a izquierda con medidas de entradas y salidas de uno a cinco metros.
-""")
+
 st.title("Graficos de histograma, dispersion y boxplot")
 # Resto del código para generar los gráficos y estadísticas
 # ...
