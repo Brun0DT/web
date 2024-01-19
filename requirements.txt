@@ -2,3 +2,8 @@ pandas
 matplotlib
 streamlit
 scipy
+Pinecone
+ChatOpenAI
+HuggingFaceEmbeddings
+load_qa_chain
+pinecone
