@@ -7,3 +7,4 @@ ChatOpenAI
 HuggingFaceEmbeddings
 load_qa_chain
 pinecone
+os
