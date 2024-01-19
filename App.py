@@ -1,6 +1,11 @@
 from PIL import Image
 import streamlit as st
 import os
+from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.chat_models import ChatOpenAI
+from langchain.chains.question_answering import load_qa_chain
+import pinecone
+from langchain.vectorstores import Pinecone
 ruta_actual = os.path.abspath("prueba.ipynb")
 carpeta=os.path.dirname(ruta_actual)
 # Cargar la imagen
@@ -43,15 +48,7 @@ def chat():
     pregunta = st.text_input("Ingresa tu mensaje:")
     if st.button("Enviar"):
         if pregunta:
-            
-
             #Generacion respuesta modulo preguntas chatgpt
-            from langchain.embeddings import HuggingFaceEmbeddings
-            from langchain.chat_models import ChatOpenAI
-            from langchain.chains.question_answering import load_qa_chain
-            import pinecone
-            from langchain.vectorstores import Pinecone
-
             def llamadabase():
                 PINECONE_API_KEY = "47b09e36-ecb7-4716-8e29-c472f2a4d9c0"
                 PINECONE_ENV = "gcp-starter"
@@ -71,9 +68,6 @@ def chat():
             llm.temperature = 0.5
             busqueda_distancia = Base_conocimiento.similarity_search(pregunta, 3) 
             respuesta = chain.run(input_documents=busqueda_distancia, question=pregunta)
-
-
-
             st.session_state.messages.append({"user": True, "message": pregunta})
             st.session_state.messages.append({"user": False, "message": f"Myriam: {respuesta}"})
 
